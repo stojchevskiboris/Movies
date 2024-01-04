@@ -1,0 +1,32 @@
+<br>
+<div *ngIf="!films" style="text-align: center;">
+    <img src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca.gif" width="50px">
+</div>
+
+<!-- <div *ngIf="films">
+    <div class="row">
+        <div class="card m-2" style="width: 18rem;" *ngFor="let f of films">
+            <div class="card-body">
+                <h5 class="card-title">{{f.title | titlecase}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Released: {{f.releaseYear}}</h6>
+                <p class="card-text">{{f.description}}</p>
+                <a class="btn btn-warning">Edit Film</a>
+                <a class="btn btn-danger float-end">Delete Film</a>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div *ngIf="pages.length!=0">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1">Previous</a>
+            </li>
+            <li *ngFor="let p of pages" value="{{p}}" class="page-link" (click)="changePage(p)">{{p}}</li>
+            <li class="page-item">
+                <a class="page-link">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

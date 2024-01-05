@@ -1,0 +1,13 @@
+.c-w{
+    width: max-content;
+    margin: 5px;
+}
+
+.border-c{
+    border: 1px solid lightgrey;
+}
+
+.d-inline{
+    display: inline-block;
+}
+

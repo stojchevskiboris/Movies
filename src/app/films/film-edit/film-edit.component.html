@@ -1,0 +1,108 @@
+<br>
+<div class="row">
+    <div class="col-xs-12">
+        <form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <button [disabled]="!filmForm.valid" type="submit" class="btn btn-success mx-2 mb-5">Save</button>
+                    <button type="button" class="btn btn-danger mx-2 mb-5" (click)="onCancel()">Cancel</button>
+                    <button type="button" class="btn btn-danger mx-2 mb-5" (click)="test()">test</button>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" formControlName="title" id="title" class="form-control">
+                    </div>
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea rows="6" formControlName="description" type="text" id="description"
+                            class="form-control">
+                        </textarea>
+                    </div>
+                </div>
+            </div><br>
+            
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="releaseYear">Release Year</label>
+                        <input type="text" formControlName="releaseYear" id="releaseYear" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="languageId">Language</label>
+                        <input type="number" formControlName="languageId" id="languageId" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="rentalDuration">Rental Duration</label>
+                        <input type="number" formControlName="rentalDuration" id="rentalDuration" class="form-control">
+                    </div>
+                </div>
+            </div><br>
+
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="rentalRate">Rent Rate</label>
+                        <input type="number" formControlName="rentalRate" id="rentalRate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="length">Film Length</label>
+                        <input type="number" formControlName="length" id="length" class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="replacementCost">Replacement Cost</label>
+                        <input type="number" formControlName="replacementCost" id="replacementCost" class="form-control">
+                    </div>
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <!-- <input type="text" formControlName="rating" id="rating" class="form-control"> -->
+                        <select class="form-select c-w" formControlName="rating" id="rating">
+                            <option value="G">G</option>
+                            <option value="R">R</option>
+                            <option value="NC-17">NC-17</option>
+                            <option value="PG-13">PG-13</option>
+                            <option value="PG">PG</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="specialFeatures">Categories</label>
+                        <input type="text" formControlName="specialFeatures" id="specialFeatures" class="form-control">
+                    </div>
+                </div>
+            </div><br>
+
+        </form>
+    </div>
+</div>

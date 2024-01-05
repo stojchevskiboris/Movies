@@ -17,15 +17,68 @@
     </div>
 </div> -->
 
+
+
+<div class="row" *ngIf="pages.length!=0">
+    <div class="col-2">
+
+        <select #sizes (change)="changeSize(sizes.value)" class="form-select c-w" aria-label="Default select example">
+            <option value="50">50</option>
+            <option selected value="80">80</option>
+            <option value="100">100</option>
+        </select>
+    </div>
+    <div class="col">
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li (click)="prev()" role="button" class="page-item page-link user-select-none"
+                    [ngClass]="{'disabled': currentPage === 1}">
+                    Previous
+                </li>
+                <li *ngFor="let p of pages" role="button" value="{{p}}" class="page-link user-select-none"
+                    [ngClass]="{'active': currentPage === p}" (click)="changePage(p)">{{p}}</li>
+                <li (click)="next()" role="button" class="page-item page-link user-select-none"
+                    [ngClass]="{'disabled': currentPage === pages.length}">
+                    Next
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div *ngIf="paginatedFilms">
+    <div class="row">
+        <div class="card m-2 col-6" style="width: 18rem;" *ngFor="let f of paginatedFilms">
+            <div class="card-body">
+                <h5 class="card-title">{{f.filmId}} {{f.title | titlecase}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Released: {{f.releaseYear}}</h6>
+                <p class="card-text">{{f.description}}</p>
+                <div>
+                    <h6 class="card-subtitle mb-2 text-muted d-inline align-middle">Rating: {{f.rating}}</h6>
+                    <button class="btn btn-light border-c float-end" [routerLink]="[f.filmId,'details']">
+                        <img width="30px" src="https://cdn-icons-png.flaticon.com/128/5077/5077296.png">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div *ngIf="pages.length!=0">
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" tabindex="-1">Previous</a>
+            <li (click)="prev()" role="button" class="page-item page-link user-select-none"
+                [ngClass]="{'disabled': currentPage === 1}">
+                Previous
             </li>
-            <li *ngFor="let p of pages" value="{{p}}" class="page-link" (click)="changePage(p)">{{p}}</li>
-            <li class="page-item">
-                <a class="page-link">Next</a>
+            <li *ngFor="let p of pages" role="button" value="{{p}}" class="page-link user-select-none"
+                [ngClass]="{'active': currentPage === p}" (click)="changePage(p)">{{p}}</li>
+            <li (click)="next()" role="button" class="page-item page-link user-select-none"
+                [ngClass]="{'disabled': currentPage === pages.length}">
+                Next
             </li>
         </ul>
     </nav>

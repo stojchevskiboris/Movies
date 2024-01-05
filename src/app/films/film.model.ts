@@ -6,7 +6,7 @@ export class Film{
         public title:string, 
         public description:string, 
         public releaseYear:number, 
-        public originalLanguageId:string,
+        public languageId:string,
         public rentalDuration:number, 
         public rentalRate:number,
         public length:number,

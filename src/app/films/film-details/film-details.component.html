@@ -1,1 +1,63 @@
-<p>film-details works!</p>
+<div>
+    <br>
+
+    <h1>{{film.title}}</h1>
+
+    <p>{{film.releaseYear}} <span class="mx-3">•</span> {{film.rating}} <span class="mx-3">•</span> {{film.length | timeConvert}}</p>
+
+    <br>
+
+    <img width="60%" src="https://patkay.com/cdn/shop/articles/Mavic-2-Pro-image-quality-and-sample-images-with-initial-impressions_1600x.jpg?v=1608345336">
+
+    <br><br>
+
+    <p class="lead">{{film.description}}</p>
+
+    <hr>
+
+    <p>Language: {{film.languageId | language}}</p>
+
+    <hr>
+
+    <p>Rental rate: {{film.rentalRate | currency}}</p>
+
+    <hr>
+
+    <p>Buy price: {{film.replacementCost | currency}}</p>
+
+    <hr>
+    
+    <p>Categories: {{film.specialFeatures}}</p>
+
+    <hr>
+
+    <p>Last updated: {{film.lastUpdate | date}}</p>
+
+
+    <button class="btn btn-secondary" routerLink="/films">Back</button>
+
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-danger mx-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Delete Film
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete "{{film.title | titlecase}}"</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+          <button type="button" class="btn btn-danger" (click)="deleteFilm(film.filmId)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <br><br><br>
+</div>

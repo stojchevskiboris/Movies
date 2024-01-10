@@ -1,16 +1,22 @@
 <div>
     <br>
-
+    <div>
+      <button [routerLink]="['/films',previd,'details']" class="btn btn-primary" *ngIf="previd!=-1">Prev Film</button>
+      <button [routerLink]="['/films',nextid,'details']" class="btn btn-primary float-end" *ngIf="nextid!=-1">Next Film</button>
+    </div>
     <h1>{{film.title}}</h1>
 
     <p>{{film.releaseYear}} <span class="mx-3">•</span> {{film.rating}} <span class="mx-3">•</span> {{film.length | timeConvert}}</p>
 
     <br>
+<div class="row">
+  <div class="col">
+    <img style="max-width: 100%;height: auto;" 
+    src="https://patkay.com/cdn/shop/articles/Mavic-2-Pro-image-quality-and-sample-images-with-initial-impressions_1600x.jpg?v=1608345336">
 
-    <img width="60%" src="https://patkay.com/cdn/shop/articles/Mavic-2-Pro-image-quality-and-sample-images-with-initial-impressions_1600x.jpg?v=1608345336">
+  </div>
 
-    <br><br>
-
+  <div class="col">
     <p class="lead">{{film.description}}</p>
 
     <hr>
@@ -32,13 +38,20 @@
     <hr>
 
     <p>Last updated: {{film.lastUpdate | date}}</p>
+  </div>
+</div>
+
+    <br><br>
+
+    
 
 
     <button class="btn btn-secondary" routerLink="/films">Back</button>
+    <button class="btn btn-warning ms-3" [routerLink]="['/films',id,'edit']">Edit</button>
 
 
     <!-- Button trigger modal -->
-<button type="button" class="btn btn-danger mx-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-danger ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Delete Film
   </button>
   

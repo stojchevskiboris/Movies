@@ -7,9 +7,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class FilmsService {
   baseUrl = 'https://localhost:44306/'
   filmsChanged = new Subject<Film[]>()
-  private films: Film[] = [];
+  films: Film[] = [];
   headers = new HttpHeaders();
-    
+
 
   constructor(private http: HttpClient) {
     const utcOffset = -(new Date().getTimezoneOffset());
@@ -37,12 +37,37 @@ export class FilmsService {
     return this.films.find((x, index) => x.filmId == id)
   }
 
+  getNext(id: number) {
+    var currentFilm = this.getFilmById(id);
+    var index = this.films.indexOf(currentFilm);
+    return this.films[index + 1]
+  }
+
+  getPrev(id: number) {
+    var currentFilm = this.getFilmById(id);
+    var index = this.films.indexOf(currentFilm);
+    return this.films[index - 1]
+  }
+
+  getFirstId(): Observable<Object> {
+    return this.http.get(this.baseUrl + 'api/films/firstid')
+  }
+
+  getLastId(): Observable<Object> {
+    return this.http.get(this.baseUrl + 'api/films/lastid')
+  }
+
   addFilm(film): Observable<Object> {
+    this.fetchFilms();
     return this.http.post(this.baseUrl + 'api/Films/Create', film, { headers: this.headers })
   }
-  
-  deleteFilm(id): Observable<Object>{
-    return this.http.delete(this.baseUrl + 'api/Films/Delete/'+ id)
+
+  updateFilm(film): Observable<Object> {
+    return this.http.put(this.baseUrl + 'api/Films/Update', film, { headers: this.headers })
+  }
+
+  deleteFilm(id): Observable<Object> {
+    return this.http.delete(this.baseUrl + 'api/Films/Delete/' + id)
   }
 
   fetchFilms() {

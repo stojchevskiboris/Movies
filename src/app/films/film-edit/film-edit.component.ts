@@ -12,11 +12,14 @@ import { Film } from '../film.model';
 export class FilmEditComponent {
   id?: number;
   editMode: boolean = false;
+  film?:Film = null
   filmForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private filmService: FilmsService) { }
+    private filmService: FilmsService) { 
+
+    }
 
 
   ngOnInit() {
@@ -24,6 +27,9 @@ export class FilmEditComponent {
       (params: Params) => {
         this.id = + params['id']
         this.editMode = params['id'] != null
+        if (this.editMode){
+          this.film = this.filmService.getFilmById(this.id)
+        }
         this.initForm();
       }
     )
@@ -48,34 +54,54 @@ export class FilmEditComponent {
 
   onSubmit() {
     if (this.editMode) {
-      // filmService update request
-      // router navigate to list
+      this.filmService.updateFilm(this.filmForm.value).subscribe()
+      this.router.navigate(['films',this.id,'details'])
+      this.filmService.fetchFilms();
     } else {
       this.filmService.addFilm(this.filmForm.value).subscribe()
       this.router.navigate(['films'])
     }
+    this.filmService.fetchFilms();
   }
 
-  onCancel() {
-    this.router.navigate(['films'])
+  onCancel(editing = false) {
+    if (editing){
+      this.router.navigate(['films',this.id,'details'])
+    }
+    else{
+      this.router.navigate(['films'])
+    }
   }
 
 
-  private initForm() {
+  private async initForm() {
     let title = '';
-    let description = ''
-    let releaseYear = ''
-    let languageId = ''
-    let rentalDuration = ''
-    let rentalRate = ''
-    let length = ''
-    let replacementCost = ''
-    let rating = ''
-    let specialFeatures = ''
+    let description = '';
+    let releaseYear;
+    let languageId = '';
+    let rentalDuration;
+    let rentalRate;
+    let length;
+    let replacementCost;
+    let rating = '';
+    let specialFeatures = '';
+    let FilmId = 0;
+    let lastUpdate = new Date()
+    
 
 
     if (this.editMode) {
-
+      title = this.film?.title
+      description = this.film?.description
+      releaseYear = this.film?.releaseYear
+      languageId = this.film?.languageId
+      rentalDuration = this.film?.rentalDuration
+      rentalRate = this.film?.rentalRate
+      length = this.film?.length
+      replacementCost = this.film?.replacementCost
+      rating = this.film?.rating
+      specialFeatures = this.film?.specialFeatures
+      FilmId = this.id
     }
     this.filmForm = new FormGroup({
       'title': new FormControl(title, Validators.required),
@@ -88,7 +114,10 @@ export class FilmEditComponent {
       'replacementCost': new FormControl(replacementCost, Validators.required),
       'rating': new FormControl(rating, Validators.required),
       'specialFeatures': new FormControl(specialFeatures),
+      'FilmId': new FormControl(FilmId),
+      'lastUpdate': new FormControl(lastUpdate)
     });
+
   }
   
 }

@@ -20,15 +20,8 @@
 
 
 <div class="row" *ngIf="pages.length!=0">
-    <div class="col-2">
 
-        <select #sizes (change)="changeSize(sizes.value)" class="form-select c-w" aria-label="Default select example">
-            <option value="50">50</option>
-            <option selected value="80">80</option>
-            <option value="100">100</option>
-        </select>
-    </div>
-    <div class="col">
+    <div >
 
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
@@ -45,15 +38,26 @@
             </ul>
         </nav>
     </div>
+
+    <div >
+        <select #sizes (change)="changeSize(sizes.value)" class="form-select c-w" aria-label="Default select example">
+            <option value="50">50</option>
+            <option selected value="80">80</option>
+            <option value="100">100</option>
+            <option value="150">150</option>
+        </select>
+    </div>
+
 </div>
 
 <div *ngIf="paginatedFilms">
     <div class="row">
         <div class="card m-2 col-6" style="width: 18rem;" *ngFor="let f of paginatedFilms">
             <div class="card-body">
-                <h5 class="card-title">{{f.filmId}} {{f.title | titlecase}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">id: {{f.filmId}}</h6>
+                <h5 class="card-title">{{f.title | titlecase}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Released: {{f.releaseYear}}</h6>
-                <p class="card-text">{{f.description}}</p>
+                <p class="card-text">{{f.description | slice:0:50}}<span *ngIf="f.description.length>50"> ...</span></p>
                 <div>
                     <h6 class="card-subtitle mb-2 text-muted d-inline align-middle">Rating: {{f.rating}}</h6>
                     <button class="btn btn-light border-c float-end" [routerLink]="[f.filmId,'details']">
